@@ -18,3 +18,5 @@ October 14 - 7:00:54 in Product controller line 60
 October 15 - 7:15:18 in adminAuth file.
 
 October 16 - 7:45:42 in index.css file
+
+October 17 - 8:01:03 - Login.jsx  8:15:31 at Add.jsx line 12

@@ -30,3 +30,7 @@ October 23 - 9:32:38 - Fronend - BestSeller.jsx am
 October 24 - 9:45:29 - Frontend - Login.jsx 
 
 October 25 - 10:00:55 - admin - cartController.jsx 
+
+October 26 - 10:31:42 - frontend - shopcontext.jsx
+
+October 29 - 11:00:33 - frontend - PlaceOrder.jsx

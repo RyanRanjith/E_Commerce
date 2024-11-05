@@ -4,6 +4,7 @@ import CartTotal from '../components/CartTotal'
 import { assets } from '../assets/assets'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const PlaceOrder = () => {
   const [method,setMethod] = useState('cod');
@@ -56,6 +57,12 @@ const PlaceOrder = () => {
         // Api calls fro cash on delivery
         case 'cod':
            const response = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}}) // here 
+           if (response.data.success) {
+            setCartItems({})
+            navigate('/orders')
+           } else {
+            toast.error(response.data.message)
+           }
            break;
 
         default:
@@ -64,6 +71,8 @@ const PlaceOrder = () => {
       
       
     } catch (error) {
+      console.log(error);
+      toast.error(error.message)
       
     }
    }

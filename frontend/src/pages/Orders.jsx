@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title';
-import axios from 'axios';
+import axios, { all } from 'axios';
 
 const Orders = () => {
 
@@ -23,8 +23,12 @@ const Orders = () => {
             item['status'] = order.status
             item['payment'] = order.payment
             item['paymentMethod'] = order.paymentMethod
+            item['date'] = order.date
+            allOrdersItem.push(item)
           })
         })
+        setorderData(allOrdersItem.reverse());
+        
       }
       
 
@@ -51,21 +55,22 @@ const Orders = () => {
                    <img className='w-16 sm:w-20' src={item.image[0]} alt="" />
                    <div className="">
                     <p className='sm:text-base font-medium'>{item.name}</p>
-                    <div className="flex items-center gap-3 mt-2 text-base text-gray-700">
-                      <p className='text-lg'>{currency}{item.price}</p>
-                      <p>Quantity: 1</p>
-                      <p>Size: M</p>
+                    <div className="flex items-center gap-3 mt-1 text-base text-gray-700">
+                      <p>{currency}{item.price}</p>
+                      <p>Quantity:{item.quantity} </p>
+                      <p>Size: {item.size}</p>
 
                     </div>
-                    <p className='mt-2'>Date: <span className=' text-gray-400'>25, July, 2024</span></p>
+                    <p className='mt-1'>Date: <span className=' text-gray-400'>{new Date(item.date).toDateString()}</span></p>
+                    <p className='mt-1'>Payment: <span className=' text-gray-400'>{item.paymentMethod}</span></p>
                    </div>
                 </div>
                 <div className="md:w-1/2 flex justify-between">
                 <div className="flex items-center gap-2">
                 <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
-                <p className='text-sm md:text-base'>Ready to Ship</p>
+                <p className='text-sm md:text-base'>{item.status}</p>
                 </div>
-               <button className='border px-4 py-2 text-sm font-medium rounded-md'>Track Order</button>
+               <button onClick={loadOrderData} className='border px-4 py-2 text-sm font-medium rounded-md'>Track Order</button>
                 </div>
 
               </div>

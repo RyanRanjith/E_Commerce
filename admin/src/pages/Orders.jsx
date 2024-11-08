@@ -24,6 +24,22 @@ try {
   toast.error(error.message)
 }
 }
+
+const statusHandler = async (event, orderId) => {
+  try {
+    const response = await axios.post(backendUrl + '/api/order/status', {orderId,status:event.target.value}, {headers:{token}})
+    if (response.data.success) {
+      await fetchAllOrders()
+
+    }
+  } catch (error) {
+   console.log(error)
+   toast.error(response.data.message)
+    
+  }
+}
+
+
 useEffect(()=>{
   fetchAllOrders();
 },[token])
@@ -45,8 +61,8 @@ useEffect(()=>{
                   return <p className='py-0.5' key={index}> {item.name} x {item.quantity} <span>{item.size}</span>, </p>
                 }
               })}
-            </div>
-            <p>{order.address.firstName + " " + order.address.lastName}</p>
+            </div> 
+            <p className='mt-3 mb-2 font-medium '>{order.address.firstName + " " + order.address.lastName}</p>
             <div className="">
               <p>{order.address.street + ","}</p>
               <p>{order.address.city + ", " + order.address.state + ", " + order.address.country + ", " + order.address.zipcode}</p>
@@ -54,17 +70,17 @@ useEffect(()=>{
             <p>{order.address.phone}</p>
             </div>
               <div className="">
-                <p>Items : {order.items.length}</p>
-                <p>Method : {order.paymentMethod}</p>
+                <p className='text-sm sm:text-[15px]'>Items : {order.items.length}</p>
+                <p className='mt-3'>Method : {order.paymentMethod}</p>
                 <p>Payment : { order.payment ? 'Done' : 'Pending'}</p>
                 <p>Date : {new Date(order.date).toLocaleDateString()}</p>
               </div>
-              <p>{currency} {order.amount}</p>
-              <select>
+              <p className='text-sm sm:text-[15px]'>{currency}{order.amount}</p>
+              <select onChange={(event)=>statusHandler(event,order._id)} value={order.status} className='p-2 font-semibold'>
                 <option value="Order Placed">Order Placed</option>
                 <option value="Packing">Packing</option>
                 <option value="Shipped">Shipped</option>
-                <option value="Out For Delivery">Out For Delivery</option>
+                <option value="Out for delivery">Out for delivery</option>
                 <option value="Delivered">Delivered</option>
               </select>
             </div>

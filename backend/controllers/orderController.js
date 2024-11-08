@@ -1,6 +1,9 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+import Stripe from 'stripe'
 
+//  gateway initialize
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 // Placing Order using COD Method
 const placeOrder = async (req,res) => {
@@ -33,7 +36,13 @@ try {
 
 // Placing Order using Stripe Method
 const placeOrderStripe = async (req,res) => {
+  try {
+    const {userId, items, amount, address} = req.body
+    const {origin} = req.headers // here 
 
+  } catch (error) {
+    
+  }
 }
 
 // Placing Order using Razorpay Method
@@ -69,7 +78,14 @@ const userOrders = async (req,res) => {
 
 // update order status from admin panel
 const updateStatus = async (req,res) => {
-
+try {
+    const {orderId, status} = req.body
+    await orderModel.findByIdAndUpdate(orderId,{status})
+    res.json({success:true,message:'Status Updated'})
+} catch (error) {
+    console.log(error);
+    res.json({success:false, message:error.message})
+}
 }
 
 

@@ -32,9 +32,11 @@ October 24 - 9:45:29 - Frontend - Login.jsx
 October 25 - 10:00:55 - admin - cartController.jsx 
 
 October 26 - 10:31:42 - frontend - shopcontext.jsx
-
+op
 October 29 - 11:00:33 - frontend - PlaceOrder.jsx
 
 November 3 - 11:15:43 - frontend - placeorder.jsx
 
 November 7 - 12:15:45 - orderController.js
+
+November 11 - 13:04:40 - orderController.js Part 2 - 13:15:20  at PlaceOrder.jsx

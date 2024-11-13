@@ -46,6 +46,8 @@ const PlaceOrder = () => {
           setCartItems({}) /// here On November 11
         }
        } catch (error) {
+        console.log(error);
+        toast.error(error)
         
        }
       }
